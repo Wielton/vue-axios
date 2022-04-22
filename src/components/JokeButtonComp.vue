@@ -1,5 +1,5 @@
 <template>
-    <v-btn color="primary" @click="getJoke" :key="jokeButton"
+    <v-btn color="primary"
             >
         {{jokeType}}
       </v-btn>
@@ -7,7 +7,7 @@
 
 <script>
 import {useMainStore} from '@/stores/rawDataApi';
-import {mapState} from 'pinia';
+
     export default {
         name: 'JokeButtonComp',
         props: {
@@ -23,8 +23,7 @@ import {mapState} from 'pinia';
         computed: {
             
             
-            // Action
-            ...mapState(useMainStore,['getJoke'])
+            
         },
         mounted (){
             this.store = useMainStore();

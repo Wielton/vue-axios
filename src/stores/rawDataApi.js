@@ -6,7 +6,9 @@ export const useMainStore = defineStore('main', {
     state : () => {
         return{
             title: 'Welcome to the Geeky Jokes page!',
-            joke: undefined
+            joke: undefined,
+            
+
             }
         },
         actions: {
@@ -30,14 +32,22 @@ export const useMainStore = defineStore('main', {
             newQuoteNotification(){
             
             }
+            
         },
-        
+        filters: {
+            toUppercase: function(text) {
+              return text.toUpperCase();
+            },
+            replaceAll: function(text) {
+                return text.replaceAll('','_');
+            }
+          },
         getters: {
             loudJoke : state =>{
-                return state.joke.toUpperCase();
+                return state.toUpperCase;
             },
             snakeJoke : state => {
-                return state.joke.replaceAll('','_');
+                return state.replaceAll;
             },
             normalJoke : state =>{
                 if (state.joke){

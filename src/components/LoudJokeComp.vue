@@ -30,6 +30,8 @@ import JokeButtonComp from './JokeButtonComp.vue';
             JokeButtonComp 
         },
         computed: {
+            // State
+            ...mapState(useMainStore,['toUpperCase']),
             // Getter
             ...mapState(useMainStore,['loudJoke']),
             

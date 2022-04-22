@@ -2,9 +2,8 @@
   <v-app>
     <v-main>
       <h1>{{title}}</h1>
-      <NormalJokeComp/>
-      <LoudJokeComp/>
-      <SnakeJokeComp/>
+      <JokeButtonComp @click="getJoke"/>
+      <GridComp/>
     </v-main>
   </v-app>
 </template>
@@ -12,9 +11,9 @@
 <script>
 import {useMainStore} from '@/stores/rawDataApi';
 import {mapState} from 'pinia';
-import NormalJokeComp from './components/NormalJokeComp.vue';
-import LoudJokeComp from './components/LoudJokeComp.vue';
-import SnakeJokeComp from './components/SnakeJokeComp.vue';
+import JokeButtonComp from './components/JokeButtonComp.vue';
+import GridComp from './components/GridComp.vue';
+
 
 
 
@@ -22,10 +21,10 @@ export default {
   name: 'App',
 
   components: {
+    JokeButtonComp,
+    GridComp
     
-    NormalJokeComp,
-    LoudJokeComp,
-    SnakeJokeComp,
+    
     
   },
 
@@ -35,6 +34,8 @@ export default {
   computed: {
             //// State
             ...mapState(useMainStore,['title']),
+            // Action
+            ...mapState(useMainStore,['getJoke'])
         },
 };
 </script>
