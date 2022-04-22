@@ -1,28 +1,40 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-main>
+      <h1>{{title}}</h1>
+      <NormalJokeComp/>
+      <LoudJokeComp/>
+      <SnakeJokeComp/>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import {useMainStore} from '@/stores/rawDataApi';
+import {mapState} from 'pinia';
+import NormalJokeComp from './components/NormalJokeComp.vue';
+import LoudJokeComp from './components/LoudJokeComp.vue';
+import SnakeJokeComp from './components/SnakeJokeComp.vue';
+
+
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  components: {
+    
+    NormalJokeComp,
+    LoudJokeComp,
+    SnakeJokeComp,
+    
+  },
+
+  data: () => ({
+    
+  }),
+  computed: {
+            //// State
+            ...mapState(useMainStore,['title']),
+        },
+};
+</script>
