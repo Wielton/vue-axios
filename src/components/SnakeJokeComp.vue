@@ -1,35 +1,34 @@
 <template>
-<v-app>
-    <v-main>
-        <JokeButtonComp/>
-        <p>{{snakeJoke}}</p>
-    </v-main>
-</v-app>
-    
-    
-    
-
+    <div>
+            <button @click="onClick">Make Snake_Text</button>
+            <p v-if="isShow">{{snakeText}}</p>
+        </div>
 </template>
 
 <script>
 import {useMainStore} from '@/stores/rawDataApi';
 import {mapState} from 'pinia';
-import JokeButtonComp from './JokeButtonComp.vue';
+
+
 
 
 
 
     export default {
-        components: { JokeButtonComp },
+
+        
         name: 'SnakeJokeComp',
         data(){
             return{
-                jokeType: 'Snake Joke',
+                isShow:false
             }
         },
         computed: {
+            
             // Getter
-            ...mapState(useMainStore,['snakeJoke']),
+            
+            ...mapState(useMainStore,['onClick']),
+            ...mapState(useMainStore,['snakeText']),
             
         },
         

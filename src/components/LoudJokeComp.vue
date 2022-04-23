@@ -1,39 +1,39 @@
 <template>
-<v-app>
-    <v-main>
-        <JokeButtonComp/>
-        <p>{{loudJoke}}</p>
-    </v-main>
-</v-app>
     
-    
-    
-
+        <div>
+            <button @click="onClick">Make UPPERTEXT</button>
+            <p v-if="isShow">{{upperText}}</p>
+        </div>
+        
 </template>
 
 <script>
 import {useMainStore} from '@/stores/rawDataApi';
 import {mapState} from 'pinia';
-import JokeButtonComp from './JokeButtonComp.vue';
+
+
 
 
 
 
     export default {
+        
         name: 'LoudJokeComp',
         data(){
             return{
-                jokeType: 'Loud Joke',
+                isShow:false
+                
+                
             }
         },
-        components : {
-            JokeButtonComp 
-        },
+        
         computed: {
-            // State
-            ...mapState(useMainStore,['toUpperCase']),
+            
             // Getter
-            ...mapState(useMainStore,['loudJoke']),
+            
+            
+            ...mapState(useMainStore,['onClick']),
+            ...mapState(useMainStore,['upperText']),
             
         },
         

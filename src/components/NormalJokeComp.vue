@@ -1,35 +1,37 @@
 <template>
-<v-app>
-    <v-main>
-        <JokeButtonComp/>
-        <p>{{normalJoke}}</p>
-    </v-main>
-</v-app>
-    
-    
-    
-
+    <div>
+            <button @click="onClick">Make normal text</button>
+            <p v-if="isShow">{{makeNormal}}</p>
+        </div>
 </template>
 
 <script>
 import {useMainStore} from '@/stores/rawDataApi';
 import {mapState} from 'pinia';
-import JokeButtonComp from './JokeButtonComp.vue';
+
+
 
 
 
 
     export default {
-        components: { JokeButtonComp },
+
+        
         name: 'NormalJokeComp',
         data(){
             return{
-                jokeType: 'Normal Joke',
+                isShow:false
+                
             }
         },
         computed: {
+            
             // Getter
-            ...mapState(useMainStore,['normalJoke']),
+            
+            
+            ...mapState(useMainStore,['onClick']),
+            ...mapState(useMainStore,['makeNormal']),
+            
             
         },
         
@@ -38,8 +40,7 @@ import JokeButtonComp from './JokeButtonComp.vue';
         },
         methods: {
             
-        }
-    }
+    }}
 </script>
 
 <style scoped>

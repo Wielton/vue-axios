@@ -6,13 +6,12 @@ export const useMainStore = defineStore('main', {
     state : () => {
         return{
             title: 'Welcome to the Geeky Jokes page!',
-            joke: undefined,
-            
-
+            jokeResponse: undefined,
+            isShow: false
             }
         },
         actions: {
-            getJoke(){
+        async getJoke(){
                 axios.request({
                     url: 'https://geek-jokes.sameerkumar.website/api?format=json',
                     method: 'GET',
@@ -22,36 +21,56 @@ export const useMainStore = defineStore('main', {
                     },
                     
                 }).then((response) => {
-                        this.joke = response;
-
-                        this.newQuoteNotification();
+                        this.jokeResponse = response.data.joke;
+                        this.onClick();
+                        console.log(response.data.joke);
+                        
                 }).catch((error) => {
                     console.log(error);
                 })
             },
-            newQuoteNotification(){
-            
-            }
+            // changeText(){
+            //     if ((this.jokeResponse != 'loudText') && (this.jokeResponse == 'joke')){
+            //         this.btnFunction = 'Make_Snake_Text';
+            //         this.jokeResponse.replaceAll('','_');
+            //     }else if((this.jokeResponse != 'snakeText') && (this.jokeResponse == 'joke')){
+            //         this.btnFunction = 'Make UPPERCASE text';
+            //         this.jokeResponse.toUpperCase();
+            //     }else {
+            //         this.btnFunction = 'Make normal text';
+            //         this.jokeResponse;
+            //     }
+            // },
+            onClick() {
+                this.isShow = !this.isShow;
+                if(this.joke != this.normalText && this.joke != this.snakeText){
+                    this.upperText;
+                }else if(this.joke != this.normalText && this.joke != this.upperText){
+                    this.snakeText;
+                }else{
+                    this.normalText;
+                }
+                }
             
         },
-        filters: {
-            toUppercase: function(text) {
-              return text.toUpperCase();
-            },
-            replaceAll: function(text) {
-                return text.replaceAll('','_');
-            }
-          },
+        
         getters: {
-            loudJoke : state =>{
-                return state.toUpperCase;
-            },
-            snakeJoke : state => {
-                return state.replaceAll;
-            },
-            normalJoke : state =>{
-                if (state.joke){
-                    return state.joke.data.joke;
+            normalText : state => {
+                if(!state.joke){
+                return state.joke;
+            }},
+            snakeText : state => {
+                if(state.joke){
+                return state.joke.replaceAll('','_');
+            }},
+            upperText : state => {
+                if(state.joke){
+                return state.joke.toUpperCase();
+            }},
+            joke : state =>{
+                if (state.jokeResponse){
+                    return state.jokeResponse;
+                    
                 }
                 return undefined;
                 

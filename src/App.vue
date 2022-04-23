@@ -1,41 +1,36 @@
 <template>
-  <v-app>
-    <v-main>
-      <h1>{{title}}</h1>
-      <JokeButtonComp @click="getJoke"/>
-      <GridComp/>
-    </v-main>
-  </v-app>
+<div id="app">
+      <JokeButtonComp/>
+      <TextModContainer/>
+</div> 
 </template>
 
 <script>
+import { mapState } from 'pinia';
 import {useMainStore} from '@/stores/rawDataApi';
-import {mapState} from 'pinia';
-import JokeButtonComp from './components/JokeButtonComp.vue';
-import GridComp from './components/GridComp.vue';
-
-
-
+import JokeButtonComp from '@/components/JokeButtonComp.vue';
+import TextModContainer from '@/components/TextModContainer.vue';
 
 export default {
   name: 'App',
-
   components: {
-    JokeButtonComp,
-    GridComp
-    
-    
-    
-  },
-
-  data: () => ({
-    
-  }),
-  computed: {
-            //// State
-            ...mapState(useMainStore,['title']),
-            // Action
-            ...mapState(useMainStore,['getJoke'])
-        },
+    TextModContainer, 
+    JokeButtonComp
+    },
+    computed: {
+      ...mapState(useMainStore,['onClick','isShow']),
+    }
+  
+  
 };
 </script>
+<style>
+  #app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>

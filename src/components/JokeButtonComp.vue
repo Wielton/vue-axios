@@ -1,28 +1,28 @@
 <template>
-    <v-btn color="primary"
-            >
-        {{jokeType}}
-      </v-btn>
+    <div>
+        <h1>{{title}}</h1>
+        <button @click="getJoke">Get Joke</button>
+        <p>{{joke}}</p>
+    </div>
 </template>
 
 <script>
 import {useMainStore} from '@/stores/rawDataApi';
+import {mapState} from 'pinia';
+
 
     export default {
         name: 'JokeButtonComp',
-        props: {
-            jokeType: String
-        },
         data(){
-            return {
-                store: undefined,
-                showLoading: false,
+            return{
                 
             }
         },
         computed: {
-            
-            
+            // Action
+            ...mapState(useMainStore,['title']),
+            ...mapState(useMainStore,['getJoke']),
+            ...mapState(useMainStore,['joke'])
             
         },
         mounted (){
@@ -30,10 +30,10 @@ import {useMainStore} from '@/stores/rawDataApi';
             useMainStore().$onAction(({name, after}) => {
                 if(name == "getJoke"){
                     after(()=>{
-                        this.showLoading = true;
+                        !this.isShow;
                     })
-                }else if(name == "newQuoteNotification"){
-                    this.showLoading = false;
+                }else{
+                    this.isShow;
                 }
             })
         },
@@ -41,6 +41,14 @@ import {useMainStore} from '@/stores/rawDataApi';
     }
 </script>
 
-<style  scoped>
+<style  >
+    button {
 
+        box-sizing: border-box;
+        border: 1px solid black;
+        background-color: #383838;
+        width: 200px;
+        height: 50px;
+        color: white
+    }
 </style>
